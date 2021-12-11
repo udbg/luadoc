@@ -1,0 +1,5 @@
+
+libffi
+======
+
+.. lua:automodule:: libffi
