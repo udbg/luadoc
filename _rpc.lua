@@ -1,5 +1,6 @@
 ---@meta
 
+---代表一个RPC会话，可以向对方notify或者request
 ---@class RpcSession
 local RpcSession = {}
 

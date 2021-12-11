@@ -2,6 +2,7 @@
 
 error 'this file should not be execute'
 
+---调试引擎
 ---@class UDbgEngine
 local UDbgEngine = {}
 
@@ -350,10 +351,14 @@ local SymbolFile = {} do
     function SymbolFile.open(path) end
 
     ---get type information
-    ---@param what string|integer
-    ---@return string kind of type
-    ---@return any extra infomation
-    function SymbolFile:get_type(what) end
+    ---@param id integer
+    ---@return TypeInfo?
+    function SymbolFile:get_type(id) end
+
+    ---get type information
+    ---@param name string
+    ---@return TypeInfo[]
+    function SymbolFile:find_type(name) end
 
     function SymbolFile:get_field(type_id) end
 
@@ -390,13 +395,11 @@ function Capstone.new(arch, mode) end
 ---@field opcode integer
 
 ---disasm
----@param self Capstone
 ---@param arg integer|string @address or binary
 ---@param a2? integer @address if arg is binary
 function Capstone:disasm(arg, a2) end
 
 ---instruction's detail
----@param self Capstone
 ---@param insn Insn
 ---@return InsnDetail
 function Capstone:detail(insn) end

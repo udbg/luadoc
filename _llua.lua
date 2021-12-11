@@ -16,6 +16,10 @@ os.name = ''
 os.arch = ''
 ---@type string | "'windows'" | "'unix'"
 os.family = ''
+---@type string | "'dll'" | "'so'" | "'dylib'"
+os.dllextension = ''
+---@type integer @pointer width, in bytes
+os.pointersize = 8
 
 ---获取脚本所在的文件路径
 ---
@@ -75,6 +79,47 @@ do
     ---make directory recursively
     ---@param path string
     function os.mkdirs(path) end
+
+    ---@alias Stdio string|"'pipe'"|"'inherit'"|"'null'"
+    ---@alias ReadArg integer|"'*'"|"'*a'"
+
+    ---create a [command](https://doc.rust-lang.org/std/process/struct.Command.html)
+    ---@param arg string|{cwd: string, stdout?: Stdio, stderr?: Stdio, stdin?: Stdio, env?: string[]}
+    ---@return Command
+    function os.command(arg) end
+
+    ---@class Command @https://doc.rust-lang.org/std/process/struct.Command.html
+    local Command = {}
+
+    ---spawn the command as a child process
+    ---@return Child
+    function Command:spawn() end
+
+    ---@class Child @https://doc.rust-lang.org/std/process/struct.Child.html
+    local Child = {}
+
+    ---get the pid of child process
+    function Child:id() end
+
+    ---kill the child
+    function Child:kill() end
+
+    ---waits for the child to exit completely
+    function Child:wait() end
+
+    function Child:try_wait() end
+
+    ---read the stdout
+    ---@param n ReadArg
+    function Child:read(n) end
+
+    ---read the stderr
+    ---@param n ReadArg
+    function Child:read_error(n) end
+
+    ---write data to stdin
+    ---@param data string
+    function Child:write(data) end
 end
 
 ---类似python中os.path.*的路径操作功能

@@ -1,4 +1,6 @@
 
+---@module 'libffi'
+
 error 'this file should not be execute'
 
 local libffi = {}
@@ -41,7 +43,7 @@ function libffi.mem(size, type) end
 ---read pack
 ---@param ptr integer|userdata
 ---@param fmt string @see string.unpack
----@return ...
+--@return ...
 function libffi.read_pack(ptr, fmt) end
 
 ---write type
